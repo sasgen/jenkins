@@ -19,8 +19,9 @@ pipeline {
     environment {
         PROJECT_NAME = 'MyProject'
         BUILD_NUMBER = "${env.BUILD_NUMBER}"
+        test = "abcd"
     }
-    
+
     options {
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '100') // 保留历史构建数和记录
         timeout(time: 20, unit: 'MINUTES')
@@ -38,6 +39,8 @@ pipeline {
                     script{ //填写运行代码
                         println('获取代码')
                         println("${test}")
+                        println("PROJECT_NAME: ${env.PROJECT_NAME}")
+                        println("BUILD_NUMBER:${env.BUILD_NUMBER}")
                     }
                 }
             }
