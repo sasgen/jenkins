@@ -39,8 +39,9 @@ pipeline {
             steps{  //步骤
                 timeout(time:5, unit:"MINUTES"){   //步骤超时时间
                     script{ //填写运行代码
-                        println('获取代码')
+                        println('获取代码') 
                         println("${test}")
+                        println("----${env.test}")
                         println("PROJECT_NAME: ${env.PROJECT_NAME}")
                         println("BUILD_NUMBER:${env.BUILD_NUMBER}")
                     }
