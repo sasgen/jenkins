@@ -34,6 +34,16 @@ pipeline {
     }
 
     stages {
+        stage("初始化") {
+            steps {
+                script {
+                    // 设置构建的显示名称
+                    currentBuild.displayName = "#${env.BUILD_NUMBER}-${params.BRANCH}-${env.BUILD_TIMESTAMP}"
+                    println("构建名称已设置为: ${currentBuild.displayName}")
+                }
+            }
+        }
+
         //下载代码
         stage("获取代码"){ //阶段名称
             when { environment name: 'test', value: 'abcd' }
@@ -89,13 +99,4 @@ pipeline {
         }
     }
 
-    // 更改当前构建的名称
-    post {
-        always {
-            script {
-                // 设置构建的显示名称
-                currentBuild.displayName = "#${env.BUILD_NUMBER}-${env.BRANCH}-${env.BUILD_TIMESTAMP}"
-            }
-        }
-    }
 }
