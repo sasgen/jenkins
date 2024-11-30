@@ -1,0 +1,47 @@
+@Library('gitlab@main') _
+
+def gitapi = new git.gitApi()
+def shellapi = new shell.shellApi()
+def requestapi = new requests.requestApi()
+def curlapi = new requests.curlApi()
+
+pipeline {
+    agent any // agent为任意
+    options {
+        buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '100') // 保留历史构建数和记录
+        timeout(time: 20, unit: 'MINUTES')
+        parallelsAlwaysFailFast()
+        skipDefaultCheckout() // 跳过默认的代码检出
+        timestamps() // 为控制台输出增加时间戳
+    }
+    parameters {
+        string(name: 'gitUrl',defaultValue: 'https://gitlab.com/test4693117/test_project.git', description: '* git地址')
+        string(name: 'credentialsId',defaultValue: 'gitlab', description: '* git凭据')
+        string(name: 'branch',defaultValue: 'dev', description: '* 分支')
+    }
+    stages {
+        stage("git-pull"){
+            steps {
+                script{
+                    gitapi.gitCheckout(gitUrl,credentialsId,branch)
+                    def version = gitapi.getGitVersion()
+                    echo version
+
+                    def commit = gitapi.getShortCommitHash()
+                    echo commit
+
+                    cmd = "df -h"
+                    res = shellapi.command(cmd)
+                    echo res
+
+                    // def status,content = requestapi.get("http://www.baidu.com",[["Content-Type":"application/json"]])
+                    // echo status
+                    // echo content
+                    
+
+
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,49 @@
+pipeline {
+    agent any
+
+    triggers {
+        genericTrigger(
+            token: 'your-token', // 用于验证 Webhook 请求的令牌
+            printContributedVariables: true, // 打印贡献的变量
+            printPostContent: true, // 打印 POST 内容
+            silentResponse: false, // 不返回 HTTP 响应
+            regexpFilterText: '$event_type', // 过滤条件
+            regexpFilterExpression: 'push', // 只处理 push 事件
+            causeString: 'Triggered by GitLab webhook', // 触发原因
+            genericVariables: [ // 定义从请求体中提取的变量
+                [key: 'branch', value: '$.object_attributes.ref', expressionType: 'JSONPath'],
+                [key: 'commitId', value: '$.object_attributes.sha', expressionType: 'JSONPath'],
+                [key: 'commitMessage', value: '$.object_attributes.message', expressionType: 'JSONPath'],
+                [key: 'repositoryUrl', value: '$.project.git_http_url', expressionType: 'JSONPath']
+            ]
+        )
+    }
+
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // 检出代码
+                git branch: "${GIT_BRANCH}", url: 'https://gitlab.com/your-repo.git'
+            }
+        }
+
+        stage('Get Push Information') {
+            steps {
+                script {
+                    // 获取推送的提交信息
+                    def commitMessage = sh(returnStdout: true, script: "git log -1 --pretty=format:'%B' ${GIT_COMMIT}").trim()
+
+                    // 打印推送的提交信息
+                    echo "Commit Message: ${commitMessage}"
+
+                    // 打印其他 GitLab 推送信息
+                    echo "Source Branch: ${GITLAB_SOURCE_BRANCH}"
+                    echo "Target Branch: ${GITLAB_TARGET_BRANCH}"
+                    echo "Merge Request Title: ${GITLAB_MERGE_REQUEST_TITLE}"
+                    echo "Merge Request Description: ${GITLAB_MERGE_REQUEST_DESCRIPTION}"
+                }
+            }
+        }
+    }
+}

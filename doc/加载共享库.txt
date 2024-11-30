@@ -1,0 +1,17 @@
+Jenkins Dashboard–>系统管理–>系统配置–>Global Pipeline Libraries
+
+涉及插件：Pipeline: Groovy 和Pipeline: Groovy Libraries,用于配置共享库
+
+
+// 引用默认配置的共享库
+@Library('demo-shared-library') _
+
+// 引用指定分支、tag的共享库代码
+@Library('demo-shared-library@1.0') _
+
+// 引用多个指定分支tag的共享库
+@Library('demo-shared-library@$Branch/Tag','demo-shared-library-test@$Branch/Tag') _
+
+@Library('utils') import org.foo.Utilities
+
+@Library('utils') import static org.foo.Utilities.*

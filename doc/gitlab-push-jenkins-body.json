@@ -1,0 +1,108 @@
+
+{
+  "object_kind": "push",
+  "event_name": "push",
+  "before": "a2e3c8d96b30967da1fa9579096d52c2b3757d2a",
+  "after": "9ff547f1010f40c54aefe693d32c026cfc7d8f4d",
+  "ref": "refs/heads/master",
+  "checkout_sha": "9ff547f1010f40c54aefe693d32c026cfc7d8f4d",
+  "message": null,
+  "user_id": 324,
+  "user_name": "h_y",
+  "user_username": "h_y",
+  "user_email": "",
+  "user_avatar": null,
+  "project_id": 3199,
+  "project": {
+    "id": 3199,
+    "name": "hello",
+    "description": "",
+    "web_url": "http://gitlab.example.com/h_y/hello",
+    "avatar_url": null,
+    "git_ssh_url": "git@gitlab.example.com:h_y/hello.git",
+    "git_http_url": "http://gitlab.example.com/h_y/hello.git",
+    "namespace": "h_y",
+    "visibility_level": 0,
+    "path_with_namespace": "h_y/hello",
+    "default_branch": "master",
+    "ci_config_path": null,
+    "homepage": "http://gitlab.example.com/h_y/hello",
+    "url": "git@gitlab.example.com:h_y/hello.git",
+    "ssh_url": "git@gitlab.example.com:h_y/hello.git",
+    "http_url": "http://gitlab.example.com/h_y/hello.git"
+  },
+  "commits": [
+    {
+      "id": "9ff547f1010f40c54aefe693d32c026cfc7d8f4d",
+      "message": "type\n",
+      "title": "type",
+      "timestamp": "2020-05-28T15:09:37+08:00",
+      "url": "http://gitlab.example.com/h_y/hello/-/commit/9ff547f1010f40c54aefe693d32c026cfc7d8f4d",
+      "author": {
+        "name": "h_y",
+        "email": "h_y@example.com"
+      },
+      "added": [
+
+      ],
+      "modified": [
+        "Jenkinsfile"
+      ],
+      "removed": [
+
+      ]
+    },
+    {
+      "id": "a49de07609ad97132c0c42aca35c75694ab80085",
+      "message": "type\n",
+      "title": "type",
+      "timestamp": "2020-05-28T15:08:47+08:00",
+      "url": "http://gitlab.example.com/h_y/hello/-/commit/a49de07609ad97132c0c42aca35c75694ab80085",
+      "author": {
+        "name": "h_y",
+        "email": "h_y@example.com"
+      },
+      "added": [
+
+      ],
+      "modified": [
+        "Jenkinsfile"
+      ],
+      "removed": [
+
+      ]
+    },
+    {
+      "id": "a2e3c8d96b30967da1fa9579096d52c2b3757d2a",
+      "message": "type\n",
+      "title": "type",
+      "timestamp": "2020-05-28T15:07:58+08:00",
+      "url": "http://gitlab.example.com/h_y/hello/-/commit/a2e3c8d96b30967da1fa9579096d52c2b3757d2a",
+      "author": {
+        "name": "h_y",
+        "email": "h_y@example.com"
+      },
+      "added": [
+
+      ],
+      "modified": [
+        "Jenkinsfile"
+      ],
+      "removed": [
+
+      ]
+    }
+  ],
+  "total_commits_count": 3,
+  "push_options": {
+  },
+  "repository": {
+    "name": "hello",
+    "url": "git@gitlab.example.com:h_y/hello.git",
+    "description": "",
+    "homepage": "http://gitlab.example.com/h_y/hello",
+    "git_http_url": "http://gitlab.example.com/h_y/hello.git",
+    "git_ssh_url": "git@gitlab.example.com:h_y/hello.git",
+    "visibility_level": 0
+  }
+}
