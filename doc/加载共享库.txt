@@ -1,6 +1,7 @@
+1、涉及插件：Pipeline: Groovy 和Pipeline: Groovy Libraries,用于配置共享库
 Jenkins Dashboard–>系统管理–>系统配置–>Global Pipeline Libraries
 
-涉及插件：Pipeline: Groovy 和Pipeline: Groovy Libraries,用于配置共享库
+
 
 
 // 引用默认配置的共享库
