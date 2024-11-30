@@ -1,6 +1,6 @@
 #!groovy
 @Library("jenkins@main") _
-def shellApi = new shell.shellApi
+def shellApi = new shell.shellApi()
 
 String workspace = "/opt/jenkins/workspace"
 
