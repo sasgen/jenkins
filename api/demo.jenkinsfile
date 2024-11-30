@@ -17,7 +17,8 @@ pipeline {
     parameters {
         string(name: 'BRANCH', defaultValue: 'main', description: 'Git branch to build')
     }
-
+    
+    // 这里面的变量可以通过 ${变量名} 或者 ${env.变量名} 获取
     environment {
         PROJECT_NAME = 'MyProject'
         BUILD_NUMBER = "${env.BUILD_NUMBER}"
