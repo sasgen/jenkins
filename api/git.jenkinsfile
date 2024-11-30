@@ -1,4 +1,4 @@
-@Library('gitlab@main') _
+@Library('jenkins@main') _
 
 def gitapi = new git.gitApi()
 def shellapi = new shell.shellApi()
