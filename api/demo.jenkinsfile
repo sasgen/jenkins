@@ -15,8 +15,11 @@ pipeline {
 
     agent any
 
+    // 外部的传参
     parameters {
         string(name: 'BRANCH', defaultValue: 'main', description: 'Git branch to build')
+        booleanParam(name: 'DEBUG_BUILD', defaultValue: false, description: '是否启用调试模式')
+        choice(name: 'ENVIRONMENT', choices: ['dev', 'test', 'prod'], description: '选择构建环境')
     }
     
     // 这里面的变量可以通过 ${变量名} 或者 ${env.变量名} 获取
@@ -56,6 +59,9 @@ pipeline {
                         println("----${env.test}")
                         println("PROJECT_NAME: ${env.PROJECT_NAME}")
                         println("BUILD_NUMBER:${env.BUILD_NUMBER}")
+                        print("BRANCH:${BRANCH}")
+                        println("DEBUG_BUILD:${DEBUG_BUILD}")
+                        println("ENVIRONMENT:${ENVIRONMENT}")
                     }
                 }
             }
