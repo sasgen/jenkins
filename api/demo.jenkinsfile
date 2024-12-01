@@ -1,11 +1,16 @@
 #!groovy
+// 引用共享库，需要jenkins上配置共享库,且名称要一致
 @Library("jenkins@main") _
+
+// 引用共享库中的方法
 def shellApi = new shell.shellApi()
 
+// 直接在外部定义变量
 String workspace = "/opt/jenkins/workspace"
 
 //Pipeline
 pipeline {
+    // 指定调用的nginx-slave节点
     // agent { 
     //     node {  
     //         label "master"   //指定运行节点的标签或者名称
@@ -17,9 +22,9 @@ pipeline {
 
     // 外部的传参
     parameters {
-        string(name: 'BRANCH', defaultValue: 'main', description: 'Git branch to build')
-        booleanParam(name: 'DEBUG_BUILD', defaultValue: false, description: '是否启用调试模式')
-        choice(name: 'ENVIRONMENT', choices: ['dev', 'test', 'prod'], default:"test",description: '选择构建环境')
+        string(name: 'BRANCH', defaultValue: 'main', description: 'Git branch to build') // 字符串参数
+        booleanParam(name: 'DEBUG_BUILD', defaultValue: false, description: '是否启用调试模式') // 布尔类型参数
+        choice(name: 'ENVIRONMENT', choices: ['dev', 'test', 'prod'], default:"test",description: '选择构建环境') // 枚举类型参数
     }
     
     // 这里面的变量可以通过 ${变量名} 或者 ${env.变量名} 获取
@@ -29,6 +34,7 @@ pipeline {
         test = "abcd"
     }
 
+    // 通用设置
     options {
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '100') // 保留历史构建数和记录
         timeout(time: 20, unit: 'MINUTES')
@@ -37,6 +43,7 @@ pipeline {
         timestamps() // 为控制台输出增加时间戳
     }
 
+    // 流水线步骤
     stages {
         stage("初始化") {
             steps {
@@ -82,24 +89,25 @@ pipeline {
 
     //构建后操作
     post {
+        // 无论构建结果怎么样,都会执行
         always {
             script{
                 println("总是打印出来")
             }
         }
-
+        // 构建成功才会执行
         success {
             script{
                 currentBuild.description = "\n 构建成功!" 
             }
         }
-
+        // 构建失败才会执行
         failure {
             script{
                 currentBuild.description = "\n 构建失败!" 
             }
         }
-
+        // 构建取消才会执行
         aborted {
             script{
                 currentBuild.description = "\n 构建取消!" 
