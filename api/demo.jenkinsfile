@@ -39,7 +39,9 @@ pipeline {
                 "id" : 100
             }
         """
-
+        // 
+        BUILD_USER_ID = ''
+        BUILD_USER_EMAIL = ''
     }
 
     // 通用设置
@@ -49,6 +51,7 @@ pipeline {
         parallelsAlwaysFailFast()
         skipDefaultCheckout() // 跳过默认的代码检出
         timestamps() // 为控制台输出增加时间戳
+        
     }
 
     // 流水线步骤
@@ -59,10 +62,14 @@ pipeline {
                     // 设置构建的显示名称
                     currentBuild.displayName = "#${env.BUILD_NUMBER}-测试"
                     currentBuild.description = "${env.description}"
-                    println("构建名称已设置为: ${currentBuild.displayName}")
-                    println("构建人:${BUILD_USER}")
-                    println("构建人ID: ${BUILD_USER_ID}")
-                    println("构建人Email:${BUILD_USER_EMAIL}")
+                    // 获取构建人用户名
+                    def buildUser = env.BUILD_USER_ID
+                    // 获取构建人邮箱
+                    def buildUserEmail = env.BUILD_USER_EMAIL
+
+                    println("构建人: ${buildUser}") 
+                    println("构建人邮箱: ${buildUserEmail}")
+
                     data = readJSON text: "${env.jsonData}"
                     println("json数据:${data.name}")
 
