@@ -1,3 +1,4 @@
+#!groovy
 @Library('jenkins@main') _
 
 def gitapi = new git.gitApi()
