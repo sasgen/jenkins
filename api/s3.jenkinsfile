@@ -1,0 +1,32 @@
+#!groovy
+@Library('jenkins@main') _
+
+def s3api = new s3.s3Api()
+
+
+pipeline {
+    agent any // agent为任意
+    options {
+        buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '100') // 保留历史构建数和记录
+        timeout(time: 20, unit: 'MINUTES')
+        parallelsAlwaysFailFast()
+        skipDefaultCheckout() // 跳过默认的代码检出
+        timestamps() // 为控制台输出增加时间戳
+    }
+    parameters {
+        string(name: 'endpointUrl',defaultValue: '', description: '* endpoint')
+        string(name: 'credentials',defaultValue: '', description: '* 凭据')
+        string(name: 'bucket',defaultValue: '', description: '* 桶')
+        string(name: 'file',defaultValue: '', description: '* 文件')
+        string(name: 'path',defaultValue: '', description: '* key')
+    }
+    stages {
+        stage("git-pull"){
+            steps {
+                script{
+                    s3api.upload(endpointUrl,credentials,bucket,file,path)
+                }
+            }
+        }
+    }
+}
