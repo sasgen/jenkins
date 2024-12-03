@@ -60,11 +60,11 @@ pipeline {
                     currentBuild.displayName = "#${env.BUILD_NUMBER}-测试"
                     currentBuild.description = "${env.description}"
                     println("构建名称已设置为: ${currentBuild.displayName}")
-                    println("构建人:" ${BUILD_USER})
-                    println("构建人ID:" ${BUILD_USER_ID})
-                    println("构建人Email:"${BUILD_USER_EMAIL})
+                    println("构建人:${BUILD_USER}")
+                    println("构建人ID: ${BUILD_USER_ID}")
+                    println("构建人Email:${BUILD_USER_EMAIL}")
                     data = readJSON text: "${env.jsonData}"
-                    println("json数据:" $data)
+                    println("json数据:${data.name}")
 
                 }
             }
