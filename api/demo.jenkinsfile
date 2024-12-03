@@ -32,6 +32,14 @@ pipeline {
         PROJECT_NAME = 'MyProject'
         BUILD_NUMBER = "${env.BUILD_NUMBER}"
         test = "abcd"
+        description = "描述"
+        jsonData = """
+            {
+                "name":"devops",
+                "id" : 100
+            }
+        """
+
     }
 
     // 通用设置
@@ -50,7 +58,14 @@ pipeline {
                 script {
                     // 设置构建的显示名称
                     currentBuild.displayName = "#${env.BUILD_NUMBER}-测试"
+                    currentBuild.description = "${env.description}"
                     println("构建名称已设置为: ${currentBuild.displayName}")
+                    println("构建人:" ${BUILD_USER})
+                    println("构建人ID:" ${BUILD_USER_ID})
+                    println("构建人Email:"${BUILD_USER_EMAIL})
+                    data = readJSON text: "${env.jsonData}"
+                    println("json数据:" $data)
+
                 }
             }
         }
