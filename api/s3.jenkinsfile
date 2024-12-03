@@ -14,11 +14,11 @@ pipeline {
         timestamps() // 为控制台输出增加时间戳
     }
     parameters {
-        string(name: 'endpointUrl',defaultValue: '', description: '* endpoint')
-        string(name: 'credentials',defaultValue: '', description: '* 凭据')
-        string(name: 'bucket',defaultValue: '', description: '* 桶')
-        string(name: 'file',defaultValue: '', description: '* 文件')
-        string(name: 'path',defaultValue: '', description: '* key')
+        string(name: 'endpointUrl',defaultValue: 'http://127.0.0.1:9000', description: '* endpoint')
+        string(name: 'credentials',defaultValue: 'minio', description: '* 凭据')
+        string(name: 'bucket',defaultValue: 'bucket1', description: '* 桶')
+        string(name: 'file',defaultValue: '/tmp/test.txt', description: '* 文件')
+        string(name: 'path',defaultValue: '/tmp/test.txt', description: '* key')
     }
     stages {
         stage("git-pull"){
