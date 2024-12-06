@@ -73,7 +73,7 @@ pipeline {
         }
 
 
-        stage("同一个节点,执行两种"){
+        stage("同时执行两种"){
             parallel {
                 stage("情况一"){
                     steps{
