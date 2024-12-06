@@ -39,6 +39,7 @@ pipeline {
                 "id" : 100
             }
         """
+        DATETIME = "${new Date().format("yyyyMMddHHmmss")}"
     }
 
     // 通用设置
@@ -63,7 +64,7 @@ pipeline {
 
                     println("构建人: ${env.BUILD_USER_ID}") 
                     println("构建人邮箱: ${env.BUILD_USER_EMAIL}")
-
+                    println("时间:${env.DATETIME}")
                     // data = readJSON text: "${env.jsonData}"
                     // println(data.name)
 
