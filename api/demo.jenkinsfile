@@ -72,6 +72,25 @@ pipeline {
             }
         }
 
+
+        stage("同一个节点,执行两种"){
+            parallel {
+                when { environment name: "test", value: "abcd"}
+                stage("情况一"){
+                    steps{
+                        println("情况一")
+                    }
+                }
+                when { environment name: "test", value: "abcdd"}
+                stage("情况二"){
+                    steps{
+                        println("情况二")
+                    }
+                }
+            }
+            
+        }
+
         //下载代码
         stage("获取代码"){ //阶段名称
             when { environment name: 'test', value: 'abcd' }
